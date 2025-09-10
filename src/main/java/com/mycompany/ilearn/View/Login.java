@@ -1,4 +1,7 @@
-package com.mycompany.ilearn;
+package com.mycompany.ilearn.View;
+
+import com.mycompany.ilearn.Controller.LoginController;
+import com.mycompany.ilearn.Model.UserModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +13,9 @@ public class Login extends JFrame {
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        UserModel userModel = new UserModel();
+        LoginController controller = new LoginController(userModel);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -48,25 +54,17 @@ public class Login extends JFrame {
         loginButton.setForeground(Color.WHITE);
         panel.add(loginButton, gbc);
 
+        // 🔗 Hook up Controller
         loginButton.addActionListener(e -> {
-            String user = userField.getText();
-            String pass = new String(passField.getPassword());
-
-            if (user.equals("admin") && pass.equals("123")) {
-                JOptionPane.showMessageDialog(this, "Login bem-sucedido!");
-                dispose();
-                new Ilearn().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos!");
-            }
+            String username = userField.getText();
+            String password = new String(passField.getPassword());
+            controller.handleLogin(this, username, password);
         });
 
         add(panel);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Login().setVisible(true);
-        });
+        SwingUtilities.invokeLater(() -> new Login().setVisible(true));
     }
 }
