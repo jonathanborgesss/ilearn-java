@@ -1,0 +1,109 @@
+package com.mycompany.ilearn.View;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Login extends JFrame {
+
+    public Login() {
+        setTitle("Login");
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // tela cheia
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+        // Painel principal (fundo branco)
+        JPanel background = new JPanel(new GridBagLayout());
+        background.setBackground(Color.WHITE);
+
+        // Card centralizado
+        JPanel card = new JPanel(new GridBagLayout());
+        card.setPreferredSize(new Dimension(400, 500));
+        card.setBackground(Color.WHITE);
+
+        // Borda com sombra cinza
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(1, 1, 4, 4, new Color(200, 200, 200)), // sombra leve
+                BorderFactory.createEmptyBorder(20, 20, 20, 20)
+        ));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+
+        // Logo
+        ImageIcon logoIcon = new ImageIcon(getClass().getResource("/logo.png"));
+        Image img = logoIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        logoIcon = new ImageIcon(img);
+
+        // Espaço antes da logo
+        gbc.gridy = 0;
+        gbc.weighty = 0.1; // espaço superior
+        card.add(Box.createVerticalStrut(30), gbc);
+
+        JLabel logo = new JLabel(logoIcon, JLabel.CENTER);
+        gbc.gridy = 1;
+        gbc.weighty = 0;
+        card.add(logo, gbc);
+
+        // Título
+        JLabel title = new JLabel("Login", SwingConstants.CENTER);
+        title.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        gbc.gridy = 2;
+        card.add(title, gbc);
+
+        // Subtítulo
+        JLabel subtitle = new JLabel("Bem-vindo de volta! Faça login para continuar", SwingConstants.CENTER);
+        subtitle.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        gbc.gridy = 3;
+        card.add(subtitle, gbc);
+
+        // Campo de email
+        JTextField emailField = new JTextField();
+        emailField.setPreferredSize(new Dimension(200, 35));
+        emailField.setBorder(BorderFactory.createTitledBorder("Email"));
+        gbc.gridy = 4;
+        card.add(emailField, gbc);
+
+        // Campo de senha
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setPreferredSize(new Dimension(200, 35));
+        passwordField.setBorder(BorderFactory.createTitledBorder("Senha"));
+        gbc.gridy = 5;
+        card.add(passwordField, gbc);
+
+        // Botão "Entrar"
+        JButton loginBtn = new JButton("Entrar");
+        loginBtn.setBackground(new Color(0, 122, 255));
+        loginBtn.setForeground(Color.WHITE);
+        loginBtn.setFocusPainted(false);
+        loginBtn.setPreferredSize(new Dimension(200, 40));
+        gbc.gridy = 6;
+        card.add(loginBtn, gbc);
+
+        // Botões sociais
+        JPanel socialPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+        socialPanel.setOpaque(false); // transparente, segue cor do card
+        JButton googleBtn = new JButton("Google");
+        JButton githubBtn = new JButton("GitHub");
+        socialPanel.add(googleBtn);
+        socialPanel.add(githubBtn);
+        gbc.gridy = 7;
+        card.add(socialPanel, gbc);
+
+        // Adiciona o card ao painel centralizado
+        GridBagConstraints bgc = new GridBagConstraints();
+        bgc.gridx = 0;
+        bgc.gridy = 0;
+        background.add(card, bgc);
+
+        add(background);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new Login().setVisible(true);
+        });
+    }
+}
