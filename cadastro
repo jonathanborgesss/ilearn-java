@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
-    public Login() {
+    public Cadastro() {
         setTitle("Cadastro");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

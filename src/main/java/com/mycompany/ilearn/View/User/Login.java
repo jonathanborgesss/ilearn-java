@@ -1,6 +1,10 @@
 package com.mycompany.ilearn.View;
 
+import com.mycompany.ilearn.Controller.LoginController;
 import com.mycompany.ilearn.Ilearn;
+import com.mycompany.ilearn.Model.UserModel;
+import com.mycompany.ilearn.View.User.Cadastro;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -14,8 +18,8 @@ public class Login extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-              UserModel userModel = new UserModel();
-                LoginController controller = new LoginController(userModel);
+        UserModel userModel = new UserModel();
+        LoginController controller = new LoginController(userModel);
 
         JPanel background = new JPanel(new GridBagLayout());
         background.setBackground(Color.WHITE);
@@ -98,7 +102,8 @@ public class Login extends JFrame {
         registerText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(Login.this, "Abrir tela de cadastro");
+                new Cadastro().setVisible(true);
+                dispose();
             }
         });
 
@@ -125,9 +130,9 @@ public class Login extends JFrame {
         background.add(card, bgc);
 
         loginBtn.addActionListener(e -> {
-                    String email = emailField.getText();
-                    String password = new String(passwordField.getPassword());
-                    controller.handleLogin(this, email, password);
+            String email = emailField.getText();
+            String password = new String(passwordField.getPassword());
+            controller.handleLogin(this, email, password);
         });
 
         add(background);

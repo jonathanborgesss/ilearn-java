@@ -1,5 +1,7 @@
 package com.mycompany.ilearn;
 
+import com.mycompany.ilearn.Model.UserModel;
+import com.mycompany.ilearn.Util.Session;
 import com.mycompany.ilearn.View.Login;
 
 import javax.swing.*;
@@ -8,6 +10,8 @@ import java.awt.*;
 public class Ilearn extends JFrame {
 
     public Ilearn() {
+        UserModel currentUser = Session.getCurrentUser();
+
         setTitle("iLearn - Home");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,26 +66,50 @@ public class Ilearn extends JFrame {
         }
 
         topBar.add(centerNav, BorderLayout.CENTER);
+        JButton startButton;
+        if(currentUser == null){
+            startButton = new JButton("Iniciar");
+            startButton.setBackground(new Color(0, 102, 255));
+            startButton.setForeground(Color.WHITE);
+            startButton.setFocusPainted(false);
+            startButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+            startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    startButton.setBackground(new Color(0, 150, 255));
+                }
 
-        JButton startButton = new JButton("Iniciar");
-        startButton.setBackground(new Color(0, 102, 255));
-        startButton.setForeground(Color.WHITE);
-        startButton.setFocusPainted(false);
-        startButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
-        startButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                startButton.setBackground(new Color(0, 150, 255));
-            }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    startButton.setBackground(new Color(0, 102, 255));
+                }
+            });
 
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                startButton.setBackground(new Color(0, 102, 255));
-            }
-        });
-        
-        startButton.addActionListener(e -> {
-            new Login().setVisible(true);
-            dispose();
-        });
+            startButton.addActionListener(e -> {
+                new Login().setVisible(true);
+                dispose();
+            });
+        } else{
+            startButton = new JButton("Logout");
+            startButton.setBackground(new Color(0, 102, 255));
+            startButton.setForeground(Color.WHITE);
+            startButton.setFocusPainted(false);
+            startButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+            startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    startButton.setBackground(new Color(0, 150, 255));
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    startButton.setBackground(new Color(0, 102, 255));
+                }
+            });
+
+            startButton.addActionListener(e -> {
+                Session.end();
+                new Ilearn().setVisible(true);
+                dispose();
+            });
+        }
+
 
         topBar.add(startButton, BorderLayout.EAST);
 

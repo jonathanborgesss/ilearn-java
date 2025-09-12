@@ -1,21 +1,25 @@
-package com.mycompany.ilearn.View;
 
+package com.mycompany.ilearn.View.User;
+
+import com.mycompany.ilearn.Controller.LoginController;
 import com.mycompany.ilearn.Ilearn;
+import com.mycompany.ilearn.Model.UserModel;
+import com.mycompany.ilearn.View.Login;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Login extends JFrame {
-
-    public Login() {
-        setTitle("Login");
+public class Cadastro extends JFrame {
+    public Cadastro() {
+        setTitle("Cadastro");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-              UserModel userModel = new UserModel();
-                LoginController controller = new LoginController(userModel);
+        UserModel userModel = new UserModel();
+        LoginController controller = new LoginController(userModel);
 
         JPanel background = new JPanel(new GridBagLayout());
         background.setBackground(Color.WHITE);
@@ -59,13 +63,20 @@ public class Login extends JFrame {
         JLabel logo = new JLabel(logoIcon, JLabel.CENTER);
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel title = new JLabel("Login", SwingConstants.CENTER);
+        JLabel title = new JLabel("Cadastro", SwingConstants.CENTER);
         title.setFont(new Font("Segoe UI", Font.BOLD, 28));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel subtitle = new JLabel("Bem-vindo de volta! Faça login para continuar", SwingConstants.CENTER);
+        JLabel subtitle = new JLabel("Seja bem-vindo! Faça o cadastro para continuar", SwingConstants.CENTER);
         subtitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JTextField nameField = new JTextField();
+        nameField.setPreferredSize(new Dimension(250, 45));
+        nameField.setMaximumSize(new Dimension(250, 45));
+        nameField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        nameField.setBorder(BorderFactory.createTitledBorder("Nome"));
+        nameField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JTextField emailField = new JTextField();
         emailField.setPreferredSize(new Dimension(250, 45));
@@ -81,7 +92,7 @@ public class Login extends JFrame {
         passwordField.setBorder(BorderFactory.createTitledBorder("Senha"));
         passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton loginBtn = new JButton("Entrar");
+        JButton loginBtn = new JButton("Criar");
         loginBtn.setBackground(new Color(0, 122, 255));
         loginBtn.setForeground(Color.WHITE);
         loginBtn.setFocusPainted(false);
@@ -90,7 +101,7 @@ public class Login extends JFrame {
         loginBtn.setMaximumSize(new Dimension(250, 50));
         loginBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel registerText = new JLabel("Não tem conta? Criar uma conta", SwingConstants.CENTER);
+        JLabel registerText = new JLabel("Já tem conta? Entrar em uma conta", SwingConstants.CENTER);
         registerText.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         registerText.setForeground(new Color(0, 122, 255));
         registerText.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -98,7 +109,8 @@ public class Login extends JFrame {
         registerText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(Login.this, "Abrir tela de cadastro");
+                new Login().setVisible(true);
+                dispose();
             }
         });
 
@@ -107,6 +119,8 @@ public class Login extends JFrame {
         centerPanel.add(title);
         centerPanel.add(Box.createVerticalStrut(3));
         centerPanel.add(subtitle);
+        centerPanel.add(Box.createVerticalStrut(10));
+        centerPanel.add(nameField);
         centerPanel.add(Box.createVerticalStrut(10));
         centerPanel.add(emailField);
         centerPanel.add(Box.createVerticalStrut(8));
@@ -125,15 +139,16 @@ public class Login extends JFrame {
         background.add(card, bgc);
 
         loginBtn.addActionListener(e -> {
-                    String email = emailField.getText();
-                    String password = new String(passwordField.getPassword());
-                    controller.handleLogin(this, email, password);
+            String email = emailField.getText();
+            String username = nameField.getText();
+            String password = new String(passwordField.getPassword());
+            controller.handleSignUp(this, email, username, password);
         });
 
         add(background);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Login().setVisible(true));
+        SwingUtilities.invokeLater(() -> new Cadastro().setVisible(true));
     }
 }
