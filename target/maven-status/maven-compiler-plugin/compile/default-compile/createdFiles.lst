@@ -1,4 +1,12 @@
-com\mycompany\ilearn\Ilearn.class
 com\mycompany\ilearn\Ilearn$1.class
+com\mycompany\ilearn\View\Login$1.class
+com\mycompany\ilearn\Model\UserModel.class
+com\mycompany\ilearn\View\User\Cadastro.class
+com\mycompany\ilearn\Util\DBConnection.class
+com\mycompany\ilearn\Ilearn.class
+com\mycompany\ilearn\View\User\Cadastro$1.class
+com\mycompany\ilearn\Ilearn$3.class
+com\mycompany\ilearn\View\Login.class
+com\mycompany\ilearn\Controller\LoginController.class
+com\mycompany\ilearn\Util\Session.class
 com\mycompany\ilearn\Ilearn$2.class
-com\mycompany\ilearn\Login.class
