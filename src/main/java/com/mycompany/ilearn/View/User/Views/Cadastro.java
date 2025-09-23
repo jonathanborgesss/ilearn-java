@@ -11,6 +11,16 @@ import java.awt.*;
 public class Cadastro extends JFrame {
     public JLabel registerText;
     public Cadastro() {
+        /*
+        JONATHAN -
+        Adicione restrições para os campos de email, nome etc
+        nao pode ser vazio
+        precisa ser um email valido
+        senha precisa conter mais de 5 caracteres
+
+
+
+         */
         setTitle("Cadastro");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

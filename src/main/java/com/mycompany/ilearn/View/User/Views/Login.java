@@ -10,6 +10,12 @@ import java.awt.*;
 public class Login extends JFrame {
     public JLabel registerText;
     public Login() {
+        /*
+        JONATHAN -
+        adicione restrições ao campo login
+        nao pode estar vazio
+        senha nao pode estar vazia
+         */
         setTitle("Login");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
