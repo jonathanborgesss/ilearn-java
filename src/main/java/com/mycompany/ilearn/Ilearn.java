@@ -11,6 +11,10 @@ import java.awt.event.MouseEvent;
 
 public class Ilearn extends JFrame {
     public Ilearn() {
+        /*
+        jonathan -
+        a navbar fica flickando, conserte.
+         */
         UserModel currentUser = Session.getCurrentUser();
 
         setTitle("iLearn - Home");

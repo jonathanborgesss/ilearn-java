@@ -7,6 +7,11 @@ import java.awt.event.MouseEvent;
 
 public class Catalogo {
     public void buildCatalogo() {
+        /*
+        jonathan -
+        o saiba mais é muito bugado, faz uma transição e faz com q
+        a pagina n precisa descer quando oteu mouse entra no card
+         */
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Catálogo de Livros");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
