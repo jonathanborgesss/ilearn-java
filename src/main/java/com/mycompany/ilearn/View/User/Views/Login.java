@@ -1,14 +1,11 @@
-package com.mycompany.ilearn.View.User;
+package com.mycompany.ilearn.View.User.Views;
 
 import com.mycompany.ilearn.Controller.LoginController;
 import com.mycompany.ilearn.Ilearn;
 import com.mycompany.ilearn.Model.UserModel;
-import com.mycompany.ilearn.View.User.Cadastro;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
     public JLabel registerText;

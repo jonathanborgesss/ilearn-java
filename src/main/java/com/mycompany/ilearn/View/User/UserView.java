@@ -1,5 +1,8 @@
 package com.mycompany.ilearn.View.User;
 
+import com.mycompany.ilearn.View.User.Views.Cadastro;
+import com.mycompany.ilearn.View.User.Views.Login;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

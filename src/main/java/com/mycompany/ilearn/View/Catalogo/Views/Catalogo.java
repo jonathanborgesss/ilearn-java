@@ -1,4 +1,4 @@
-package com.mycompany.ilearn.View.Catalogo;
+package com.mycompany.ilearn.View.Catalogo.Views;
 
 import javax.swing.*;
 import java.awt.*;

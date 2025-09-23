@@ -1,5 +1,7 @@
 package com.mycompany.ilearn.View.Catalogo;
 
+import com.mycompany.ilearn.View.Catalogo.Views.Catalogo;
+
 public class CatalogoView {
     public CatalogoView(){
 
