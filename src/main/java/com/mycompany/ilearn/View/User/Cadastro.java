@@ -4,7 +4,7 @@ package com.mycompany.ilearn.View.User;
 import com.mycompany.ilearn.Controller.LoginController;
 import com.mycompany.ilearn.Ilearn;
 import com.mycompany.ilearn.Model.UserModel;
-import com.mycompany.ilearn.View.Login;
+import com.mycompany.ilearn.View.User.Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Cadastro extends JFrame {
+    public JLabel registerText;
     public Cadastro() {
         setTitle("Cadastro");
         setSize(900, 600);
@@ -101,18 +102,11 @@ public class Cadastro extends JFrame {
         loginBtn.setMaximumSize(new Dimension(250, 50));
         loginBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel registerText = new JLabel("Já tem conta? Entrar em uma conta", SwingConstants.CENTER);
+        registerText = new JLabel("Já tem conta? Entrar em uma conta", SwingConstants.CENTER);
         registerText.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         registerText.setForeground(new Color(0, 122, 255));
         registerText.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerText.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Login().setVisible(true);
-                dispose();
-            }
-        });
 
         centerPanel.add(logo);
         centerPanel.add(Box.createVerticalStrut(5));

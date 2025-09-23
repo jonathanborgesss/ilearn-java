@@ -1,12 +1,12 @@
-package javaapplication9;
+package com.mycompany.ilearn.View.Catalogo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class JavaApplication9 {
-
-    public static void main(String[] args) {
+public class Catalogo {
+    public void buildCatalogo() {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Catálogo de Livros");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,16 +57,16 @@ public class JavaApplication9 {
             painelCatalogo.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
             painelCatalogo.setBackground(Color.WHITE);
 
-            Livro[] livros = {
-                new Livro("1984", "George Orwell"),
-                new Livro("Dom Casmurro", "Machado de Assis"),
-                new Livro("O Pequeno Príncipe", "Antoine de Saint-Exupéry"),
-                new Livro("Memórias Póstumas de Brás Cubas", "Machado de Assis"),
-                new Livro("O Senhor dos Anéis", "J.R.R. Tolkien"),
-                new Livro("Harry Potter", "J.K. Rowling")
+            Catalogo.Livro[] livros = {
+                    new Catalogo.Livro("1984", "George Orwell"),
+                    new Catalogo.Livro("Dom Casmurro", "Machado de Assis"),
+                    new Catalogo.Livro("O Pequeno Príncipe", "Antoine de Saint-Exupéry"),
+                    new Catalogo.Livro("Memórias Póstumas de Brás Cubas", "Machado de Assis"),
+                    new Catalogo.Livro("O Senhor dos Anéis", "J.R.R. Tolkien"),
+                    new Catalogo.Livro("Harry Potter", "J.K. Rowling")
             };
 
-            for (Livro livro : livros) {
+            for (Catalogo.Livro livro : livros) {
                 painelCatalogo.add(criarPainelLivro(livro));
             }
 
@@ -115,11 +115,11 @@ public class JavaApplication9 {
 
         botaoSaibaMais.addActionListener(e -> {
             JOptionPane.showMessageDialog(painelLivro,
-                "Título: " + livro.nome + "\nAutor: " + livro.autor,
-                "Detalhes do Livro", JOptionPane.INFORMATION_MESSAGE);
+                    "Título: " + livro.nome + "\nAutor: " + livro.autor,
+                    "Detalhes do Livro", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        painelImagem.addMouseListener(new MouseAdapter() {
+        painelLivro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 botaoSaibaMais.setVisible(true);

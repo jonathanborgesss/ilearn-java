@@ -2,7 +2,7 @@ package com.mycompany.ilearn;
 
 import com.mycompany.ilearn.Model.UserModel;
 import com.mycompany.ilearn.Util.Session;
-import com.mycompany.ilearn.View.Login;
+import com.mycompany.ilearn.View.User.UserView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Ilearn extends JFrame {
-
     public Ilearn() {
         UserModel currentUser = Session.getCurrentUser();
 
@@ -94,7 +93,7 @@ public class Ilearn extends JFrame {
             });
 
             startButton.addActionListener(e -> {
-                new Login().setVisible(true);
+                new UserView();
                 dispose();
             });
         } else {
