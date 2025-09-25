@@ -50,27 +50,20 @@ public class Ilearn extends JFrame {
         JPanel centerNav = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         centerNav.setBackground(Color.WHITE);
         ArrayList<Map<String, String>> navItems = new ArrayList<>();
-        Map[] itens = new HashMap[6];
-        itens[0] = new HashMap<>();
-        itens[0].put("Text", "Sobre");
-        itens[0].put("Call", "About");
-        itens[1] = new HashMap<>();
-        itens[1].put("Text", "Recursos");
-        itens[1].put("Call", "Resources");
-        itens[2] = new HashMap<>();
-        itens[2].put("Text", "Soluções");
-        itens[2].put("Call", "Solutions");
-        itens[3] = new HashMap<>();
-        itens[3].put("Text", "FAQ");
-        itens[3].put("Call", "Faq");
-        itens[4] = new HashMap<>();
-        itens[4].put("Text", "Catálogo");
-        itens[4].put("Call", "Catalogo");
-        itens[5] = new HashMap<>();
-        itens[5].put("Text", "Contato");
-        itens[5].put("Call", "Contact");
-        for(int i = 0; i<5; i++){
-            navItems.add(itens[i]);
+        String[][] menuItems = {
+                //Texto a ser visto / "Call" da função da navbar
+                {"Sobre", "About"},
+                {"Recursos", "Resources"},
+                {"Soluções", "Solutions"},
+                {"FAQ", "Faq"},
+                {"Catálogo", "Catalogo"},
+                {"Contato", "Contact"}
+        };
+        for (String[] item : menuItems) {
+            Map<String, String> navItem = new HashMap<>();
+            navItem.put("Text", item[0]);
+            navItem.put("Call", item[1]);
+            navItems.add(navItem);
         }
         for (Map<String, String> item : navItems) {
             JButton btn = new JButton(item.get("Text"));
