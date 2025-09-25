@@ -2,12 +2,16 @@ package com.mycompany.ilearn;
 
 import com.mycompany.ilearn.Model.UserModel;
 import com.mycompany.ilearn.Util.Session;
+import com.mycompany.ilearn.View.NavBar.NavBarView;
 import com.mycompany.ilearn.View.User.UserView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Ilearn extends JFrame {
     public Ilearn() {
@@ -45,10 +49,31 @@ public class Ilearn extends JFrame {
         // Itens Navbar
         JPanel centerNav = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
         centerNav.setBackground(Color.WHITE);
-
-        String[] navItems = {"Home", "Sobre", "Recursos", "Soluções", "FAQ", "Catálogo", "Contato"};
-        for (String item : navItems) {
-            JButton btn = new JButton(item);
+        ArrayList<Map<String, String>> navItems = new ArrayList<>();
+        Map[] itens = new HashMap[6];
+        itens[0] = new HashMap<>();
+        itens[0].put("Text", "Sobre");
+        itens[0].put("Call", "About");
+        itens[1] = new HashMap<>();
+        itens[1].put("Text", "Recursos");
+        itens[1].put("Call", "Resources");
+        itens[2] = new HashMap<>();
+        itens[2].put("Text", "Soluções");
+        itens[2].put("Call", "Solutions");
+        itens[3] = new HashMap<>();
+        itens[3].put("Text", "FAQ");
+        itens[3].put("Call", "Faq");
+        itens[4] = new HashMap<>();
+        itens[4].put("Text", "Catálogo");
+        itens[4].put("Call", "Catalogo");
+        itens[5] = new HashMap<>();
+        itens[5].put("Text", "Contato");
+        itens[5].put("Call", "Contact");
+        for(int i = 0; i<5; i++){
+            navItems.add(itens[i]);
+        }
+        for (Map<String, String> item : navItems) {
+            JButton btn = new JButton(item.get("Text"));
             btn.setBackground(Color.WHITE);
             btn.setForeground(new Color(0, 102, 255));
             btn.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -70,6 +95,11 @@ public class Ilearn extends JFrame {
                     btn.setForeground(new Color(0, 102, 255));
                     btn.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
                 }
+            });
+
+            btn.addActionListener(e -> {
+                new NavBarView(item.get("Call"));
+                dispose();
             });
 
             centerNav.add(btn);
