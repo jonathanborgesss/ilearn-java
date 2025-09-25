@@ -7,19 +7,11 @@ import com.mycompany.ilearn.Model.UserModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class Login extends JFrame {
+public class Login extends JPanel {
     public JLabel registerText;
-    public Login() {
-        /*
-        JONATHAN -
-        adicione restrições ao campo login
-        nao pode estar vazio
-        senha nao pode estar vazia
-         */
-        setTitle("Login");
-        setSize(900, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+
+    public Login(Ilearn frame) {  // Pass MainFrame so we can switch cards
+        setLayout(new BorderLayout());
 
         UserModel userModel = new UserModel();
         LoginController controller = new LoginController(userModel);
@@ -44,10 +36,7 @@ public class Login extends JFrame {
         backButton.setBorderPainted(false);
         backButton.setFocusPainted(false);
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        backButton.addActionListener(e -> {
-            new Ilearn().setVisible(true);
-            dispose();
-        });
+        backButton.addActionListener(e -> frame.showView("Home"));  // Navigate to Home view
 
         topPanel.add(backButton);
         card.add(topPanel, BorderLayout.NORTH);
@@ -58,7 +47,6 @@ public class Login extends JFrame {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBackground(Color.WHITE);
-        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // bloco todo mais para cima
 
         ImageIcon logoIcon = new ImageIcon(getClass().getResource("/logo.png"));
         Image img = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -128,13 +116,15 @@ public class Login extends JFrame {
         loginBtn.addActionListener(e -> {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
-            controller.handleLogin(this, email, password);
+
+            if (email.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Email e senha não podem estar vazios.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            controller.handleLogin(frame, email, password); // Pass main frame to controller if needed
         });
 
-        add(background);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Login().setVisible(true));
+        add(background, BorderLayout.CENTER);
     }
 }

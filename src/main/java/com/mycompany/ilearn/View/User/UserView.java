@@ -1,5 +1,6 @@
 package com.mycompany.ilearn.View.User;
 
+import com.mycompany.ilearn.Ilearn;
 import com.mycompany.ilearn.View.User.Views.Cadastro;
 import com.mycompany.ilearn.View.User.Views.Login;
 
@@ -7,26 +8,33 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class UserView {
-    public UserView(){
-        Login loginView = new Login();
-        Cadastro cadastroView = new Cadastro();
+    private Login loginView;
+    private Cadastro cadastroView;
+
+    public UserView(Ilearn mainFrame) {
+        loginView = new Login(mainFrame);
+        cadastroView = new Cadastro(mainFrame);
+
         loginView.registerText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                cadastroView.setVisible(true);
-                loginView.setVisible(false);
+                mainFrame.showView("Cadastro");
             }
         });
+
         cadastroView.registerText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                loginView.setVisible(true);
-                cadastroView.setVisible(false);
+                mainFrame.showView("Login");
             }
         });
-        loginView.setVisible(true);
     }
-    public static void main(String[] args) {
-        new UserView();
+
+    public Login getLoginPanel() {
+        return loginView;
+    }
+
+    public Cadastro getCadastroPanel() {
+        return cadastroView;
     }
 }

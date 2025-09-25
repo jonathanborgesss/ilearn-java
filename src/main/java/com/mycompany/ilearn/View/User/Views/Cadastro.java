@@ -1,4 +1,3 @@
-
 package com.mycompany.ilearn.View.User.Views;
 
 import com.mycompany.ilearn.Controller.LoginController;
@@ -8,29 +7,26 @@ import com.mycompany.ilearn.Model.UserModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class Cadastro extends JFrame {
+public class Cadastro extends JPanel {
     public JLabel registerText;
-    public Cadastro() {
+    private Ilearn mainFrame;
+
+    public Cadastro(Ilearn mainFrame) {
+        this.mainFrame = mainFrame;
+
         /*
         JONATHAN -
         Adicione restrições para os campos de email, nome etc
         nao pode ser vazio
         precisa ser um email valido
         senha precisa conter mais de 5 caracteres
-
-
-
          */
-        setTitle("Cadastro");
-        setSize(900, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         UserModel userModel = new UserModel();
         LoginController controller = new LoginController(userModel);
 
-        JPanel background = new JPanel(new GridBagLayout());
-        background.setBackground(Color.WHITE);
+        setBackground(Color.WHITE);
+        setLayout(new GridBagLayout());
 
         JPanel card = new JPanel(new BorderLayout());
         card.setPreferredSize(new Dimension(400, 500));
@@ -50,8 +46,9 @@ public class Cadastro extends JFrame {
         backButton.setFocusPainted(false);
         backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         backButton.addActionListener(e -> {
-            new Ilearn().setVisible(true);
-            dispose();
+            // Instead of new Ilearn(), just switch back to Login in the main frame
+            mainFrame.showView("User");  // or another logic to switch views
+            // if UserView uses cards internally, it will handle showing Login
         });
 
         topPanel.add(backButton);
@@ -63,7 +60,7 @@ public class Cadastro extends JFrame {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBackground(Color.WHITE);
-        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // bloco todo mais para cima
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         ImageIcon logoIcon = new ImageIcon(getClass().getResource("/logo.png"));
         Image img = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -100,14 +97,14 @@ public class Cadastro extends JFrame {
         passwordField.setBorder(BorderFactory.createTitledBorder("Senha"));
         passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton loginBtn = new JButton("Criar");
-        loginBtn.setBackground(new Color(0, 122, 255));
-        loginBtn.setForeground(Color.WHITE);
-        loginBtn.setFocusPainted(false);
-        loginBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        loginBtn.setPreferredSize(new Dimension(250, 50));
-        loginBtn.setMaximumSize(new Dimension(250, 50));
-        loginBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton createBtn = new JButton("Criar");
+        createBtn.setBackground(new Color(0, 122, 255));
+        createBtn.setForeground(Color.WHITE);
+        createBtn.setFocusPainted(false);
+        createBtn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        createBtn.setPreferredSize(new Dimension(250, 50));
+        createBtn.setMaximumSize(new Dimension(250, 50));
+        createBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         registerText = new JLabel("Já tem conta? Entrar em uma conta", SwingConstants.CENTER);
         registerText.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -127,7 +124,7 @@ public class Cadastro extends JFrame {
         centerPanel.add(Box.createVerticalStrut(8));
         centerPanel.add(passwordField);
         centerPanel.add(Box.createVerticalStrut(12));
-        centerPanel.add(loginBtn);
+        centerPanel.add(createBtn);
         centerPanel.add(Box.createVerticalStrut(8));
         centerPanel.add(registerText);
 
@@ -137,19 +134,13 @@ public class Cadastro extends JFrame {
         GridBagConstraints bgc = new GridBagConstraints();
         bgc.gridx = 0;
         bgc.gridy = 0;
-        background.add(card, bgc);
+        add(card, bgc);
 
-        loginBtn.addActionListener(e -> {
+        createBtn.addActionListener(e -> {
             String email = emailField.getText();
             String username = nameField.getText();
             String password = new String(passwordField.getPassword());
             controller.handleSignUp(this, email, username, password);
         });
-
-        add(background);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Cadastro().setVisible(true));
     }
 }

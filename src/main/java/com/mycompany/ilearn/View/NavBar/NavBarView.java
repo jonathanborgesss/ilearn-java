@@ -34,6 +34,6 @@ public class NavBarView {
         handleView(call);
     }
     public static void main(String[] args) {
-        new NavBarView("About");
+        NavBarView view = new NavBarView("About");
     }
 }
